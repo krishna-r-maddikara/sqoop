@@ -1,0 +1,55 @@
+1.$ bin/sqoop import --connect jdbc:mysql://localhost:3306/db1 --username root --password password --table tableName --target-dir /user/abc/tableName
+
+2.$ bin/sqoop import --options-file /opt/option-file.txt --table tableName --target-dir /user/abc/tableName
+
+--connect
+jdbc:mysql://localhost/db1
+--username
+root
+--password
+password
+
+3.$ bin/sqoop import --connect jdbc:mysql://localhost:3306/db1 --username root --password password --table tableName --target-dir /user/abc/tableName --fields-terminated-by ',' --escaped-by \\ --enclosed-by '\"'
+
+4.$ bin/sqoop import --connect jdbc:mysql://localhost/db1 --username root --password password --target-dir /user/pqr/abcde --as-sequencefile --table tableName
+
+
+5.$ bin/sqoop import --connect jdbc:mysql://localhost/db1 --username root --password password --target-dir /user/pqr/abcde --direct --table tableName
+
+
+6.$ bin/sqoop import --connect jdbc:mysql://localhost:3306/db1 --username root --password password --table student --target-dir /user/abc/student --columns "student_id,address,name"
+
+7.$ bin/sqoop import --connect jdbc:mysql://localhost:3306/db1 --username root --password password --table student --target-dir /user/abc/student --where 'student_id<100'
+
+8.$ bin/sqoop import --connect jdbc:mysql://localhost:3306/db1 --username root --password password --table student --target-dir /user/abc/student --columns "student_id,address,name" -- where  'student_id<100'
+
+9.$ bin/sqoop import --connect jdbc:mysql://localhost:3306/db1 --username root --password password --query "select student_id, name, addess from student where student_id< 100 and $CONDITIONS" --target-dir /user/abc/student –split-by id
+
+
+10.$ bin/sqoop import-all-tables --connect jdbc:mysql://localhost:3306/db1 --username root --password password  
+
+11.$ bin/sqoop import –connect jdbc:mysql://localhost:3306/db1 –username root –password password –table tableName –target-dir /user/abc/tableName  -m 16
+
+12.$bin/sqoop import –connect jdbc:mysql://localhost:3306/db1 –username root –password password –table student –target-dir /user/abc/student –columns "student_id,address,name"  --incremental append –last-value 1000 –check-column id
+
+13.bin/sqoop import –connect jdbc:mysql://localhost:3306/db1 –username root –password password –table student –target-dir /user/abc/student –columns "student_id,address,name"  --incremental lastmodified –last-value "2012-11-06 19:01:35"–check-column col4
+
+14.$ bin/sqoop job –create myjob–import –connect jdbc:mysql://localhost:3306/db1 –username root –password password–table student –target-dir /user/abc/student –columns "student_id,address,name"  --incremental lastmodified –last-value "2012-11-06 19:01:35"–check-column col4
+
+15.$ bin/sqoop import  --connect jdbc:mysql://localhost:3306/db1 –username root –password password–table tableName  --hive-table tableName –create-hive-table –hive-import –hive-home path/to/hive_home
+
+16.$ bin/sqoop import  --connect jdbc:mysql://localhost:3306/db1 –username root –password password–table tableName  --hive-table tableName –create-hive-table –hive-import –hive-home path/to/hive_home –split-by column_name
+
+
+17.$ bin/sqoop export –connect jdbc:mysql://localhost:3306/db1 –table tableName  --username root –-password password --export-dir /user/abc/tableName
+
+18.$ bin/sqoop export –connect jdbc:mysql://localhost:3306/db1 –table tableName --username root –-password password --export-dir /user/username/hdfsDir –input-fields-terminated-by '\t'  --input-lines-terminated-by '\n'
+
+19.$ bin/sqoop export –connect jdbc:mysql://localhost/test_db –table invoice  --export-dir /user/hive/warehouse/invoice –username root –password password –m 1 –input-fields-terminated-by '\001'
+
+20.$bin/sqoop import –connect http://localhost:8091/pools –table DUMP
+
+21.$bin/sqoop import–connect http://localhost:8091/pools,http://localhost1:8091/pools –table DUMP
+
+
+22.$bin/sqoop export–connect http://localhost:8091/pools --tablegarbage_value --export-dir /user/username/hdfsDir
